@@ -229,3 +229,13 @@ hr {
 	height : 100%;
 	min-height : 800px;
 }
+
+#footer {
+	border-top: 1px solid #CCC;
+	padding-top: 8px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	padding-bottom: 10px;
+	font-size: 12px;
+	font-weight: bold;
+}
