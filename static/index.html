@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>CodePad</title>
+
+	<link rel="stylesheet" type="text/css" media="all" href="css/metro-ui/modern.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
+
+        <script src="bcsocket.js"></script>               <!-- add transport -->
+        <script src="webclient/share.js"></script>        <!-- ShareJS -->
+        <script src="webclient/textarea.js"></script>     <!-- TextArea -->
+
+        <script src="editarea_0_8_2/edit_area/edit_area_full.2.js"></script>   <!-- EditArea --> 
+
+    </head>
+
+    <body>
+	<!-- Header Starts here -->
+	<div id="header">
+		<div class="nav-bar bg-color-darken">
+			<div class="page padding10 height100">
+				<span class="element">
+					<h2 class="fg-color-white">CodePad</h2>
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- Header Ends here -->
+	<div class="container center">
+		<div class="page">
+		        <textarea class="sharetext" id="sharetext"></textarea>
+		</div>
+	</div>
+
+    </body>
+
+</html>
+
+<script type="text/javascript">
+var attachShareJS = function() {
+	var d = document, fs = window.frames;
+	var docid = "sharetext";
+	iframe = d.getElementById("frame_" + docid);
+
+	function iframeRef( frameRef ) {
+	    return frameRef.contentWindow ? frameRef.contentWindow.document : frameRef.contentDocument
+	}
+
+	var editor = iframeRef( iframe)
+	var elem = editor.getElementById("textarea");
+
+	var connection = sharejs.open('test', 'text', function(error, doc) {
+		// this function is called once the connection is opened
+		if (error) {
+			console.log("ERROR:", error);
+		} else {
+			// attach the ShareJS document to the textarea
+			//console.log("EditArea successfully attached to sharejs doc");
+			doc.attach_textarea(elem);
+		}
+	});
+};
+
+</script>
+
+<script language="javascript" type="text/javascript">
+editAreaLoader.init({
+	id : "sharetext"		// textarea id
+	,syntax: "css"			// syntax to be uses for highgliting
+	,start_highlight: true		// to display with highlight mode on start-up
+	,EA_load_callback : "attachShareJS"
+	,allow_toggle : false
+	,toolbar: "full screen"
+	,toolbar_display : false
+});
+</script>
